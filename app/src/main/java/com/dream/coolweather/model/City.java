@@ -4,40 +4,37 @@ package com.dream.coolweather.model;
  * Created by asus on 2015/2/27.
  */
 public class City {
-    private int id;
-    private String cityName;
-    private String cityCode;
-    private int provinceId;
+    private String id;
+    private String name;
+    private String en;
 
-    public int getId() {
+    public City(String id, String name, String en) {
+        this.id = id;
+        this.name = name;
+        this.en = en;
+    }
+
+    public String getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(String id) {
         this.id = id;
     }
 
-    public String getCityName() {
-        return cityName;
+    public String getName() {
+        return name;
     }
 
-    public void setCityName(String cityName) {
-        this.cityName = cityName;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public String getCityCode() {
-        return cityCode;
+    public String getEn() {
+        return en;
     }
 
-    public void setCityCode(String cityCode) {
-        this.cityCode = cityCode;
-    }
-
-    public int getProvinceId() {
-        return provinceId;
-    }
-
-    public void setProvinceId(int provinceId) {
-        this.provinceId = provinceId;
+    public void setEn(String en) {
+        this.en = en;
     }
 }

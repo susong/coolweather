@@ -4,6 +4,7 @@ import android.app.Application;
 import android.test.ApplicationTestCase;
 import android.util.Log;
 
+import com.dream.coolweather.util.CityIdXmlParse;
 import com.dream.coolweather.util.HttpCallbackListener;
 import com.dream.coolweather.util.HttpUtil;
 
@@ -27,5 +28,9 @@ public class ApplicationTest extends ApplicationTestCase<Application> {
                 Log.d("CoolWeather", "=======================" + e.getMessage());
             }
         });
+    }
+
+    public void testParseCityId(){
+        CityIdXmlParse.parseCityId();
     }
 }
