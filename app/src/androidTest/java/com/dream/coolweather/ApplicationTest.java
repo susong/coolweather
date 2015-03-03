@@ -31,6 +31,6 @@ public class ApplicationTest extends ApplicationTestCase<Application> {
     }
 
     public void testParseCityId(){
-        CityIdXmlParse.parseCityId();
+        CityIdXmlParse.parseCityId(getContext());
     }
 }
