@@ -7,10 +7,12 @@ public class Province {
     private int id;
     private String provinceName;
     private String provinceCode;
+    private String stateId;
 
     public int getId() {
         return id;
     }
+
 
     public void setId(int id) {
         this.id = id;
@@ -31,4 +33,13 @@ public class Province {
     public void setProvinceCode(String provinceCode) {
         this.provinceCode = provinceCode;
     }
+
+    public String getStateId() {
+        return stateId;
+    }
+
+    public void setStateId(String stateId) {
+        this.stateId = stateId;
+    }
+
 }

@@ -13,14 +13,14 @@ public class Area {
 
     private List<Area> areas;
 
-    private List<City> cities;
+//    private List<City> cities;
 
     public Area(String id, String name, String en) {
         this.id = id;
         this.name = name;
         this.en = en;
         areas = new ArrayList<>();
-        cities = new ArrayList<>();
+//        cities = new ArrayList<>();
     }
 
     public String getId() {
@@ -55,11 +55,11 @@ public class Area {
         this.areas = areas;
     }
 
-    public List<City> getCities() {
-        return cities;
-    }
+//    public List<City> getCities() {
+//        return cities;
+//    }
 
-    public void setCities(List<City> cities) {
-        this.cities = cities;
-    }
+//    public void setCities(List<City> cities) {
+//        this.cities = cities;
+//    }
 }
