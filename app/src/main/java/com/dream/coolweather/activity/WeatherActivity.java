@@ -13,6 +13,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.dream.coolweather.R;
+import com.dream.coolweather.service.AutoUpdateService;
 import com.dream.coolweather.util.HttpCallbackListener;
 import com.dream.coolweather.util.HttpUtil;
 import com.dream.coolweather.util.Utility;
@@ -128,6 +129,9 @@ public class WeatherActivity extends Activity implements View.OnClickListener {
         pressure.setText(preferences.getString("pressure", ""));
         weather_info_layout.setVisibility(View.VISIBLE);
         city_name.setVisibility(View.VISIBLE);
+
+        Intent intent = new Intent(this, AutoUpdateService.class);
+        startService(intent);
     }
 
     @Override
