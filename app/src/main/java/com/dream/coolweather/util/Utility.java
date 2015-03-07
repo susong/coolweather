@@ -62,7 +62,7 @@ public class Utility {
     /**
      * 解析服务器返回的JSON数据，并将解析出的数据存储到本地
      */
-    public static void handleWeatherResponse(Context context, String response) {
+    public static boolean handleWeatherResponse(Context context, String response) {
         try {
             JSONObject jsonObject = new JSONObject(response);
             String status = jsonObject.getString("status");
@@ -80,11 +80,29 @@ public class Utility {
             String humidity = now.getString("humidity");
             String visibility = now.getString("visibility");
             String pressure = now.getString("pressure");
-            saveWeatherInfo(context, city_name, last_update, text, temperature, feels_like, wind_direction,
+            saveWeatherInfo(context, status, city_name, last_update, text, temperature, feels_like, wind_direction,
                     wind_speed, wind_scale, humidity, visibility, pressure);
+            return true;
         } catch (JSONException e) {
             e.printStackTrace();
+            try {
+                JSONObject jsonObject = new JSONObject(response);
+                String status = jsonObject.getString("status");
+                saveStatus(context, status);
+            } catch (JSONException e1) {
+                e1.printStackTrace();
+            }
         }
+        return false;
+    }
+
+    /**
+     * 保存错误信息
+     */
+    private static void saveStatus(Context context, String status) {
+        SharedPreferences.Editor editor = PreferenceManager.getDefaultSharedPreferences(context).edit();
+        editor.putString("status", status);
+        editor.apply();
     }
 
     /**
@@ -100,14 +118,14 @@ public class Utility {
      * @param visibility     能见度。单位：公里km
      * @param pressure       气压。单位：百帕hPa
      */
-    public static void saveWeatherInfo(Context context, String city_name, String last_update,
+    public static void saveWeatherInfo(Context context, String status, String city_name, String last_update,
                                        String text, String temperature, String feels_like,
                                        String wind_direction, String wind_speed, String wind_scale,
                                        String humidity, String visibility, String pressure) {
         SimpleDateFormat format = new SimpleDateFormat("yyyy年M月d日", Locale.CHINA);
 
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss", Locale.CHINA);
-        SimpleDateFormat simpleDate = new SimpleDateFormat("yyyy年M月d日 HH时mm分ss秒", Locale.CHINA);
+        SimpleDateFormat simpleDate = new SimpleDateFormat("HH时mm分ss秒", Locale.CHINA);
         String last_update_time = "";
         try {
             Date date = simpleDateFormat.parse(last_update);
@@ -117,8 +135,9 @@ public class Utility {
         }
         SharedPreferences.Editor editor = PreferenceManager.getDefaultSharedPreferences(context).edit();
         editor.putBoolean("city_selected", true);
+        editor.putString("status", status);
         editor.putString("city_name", city_name);
-        editor.putString("last_update", last_update_time);
+        editor.putString("last_update", "今天" + last_update_time + "发布");
         editor.putString("current_date", format.format(new Date()));
         editor.putString("text", text);
         editor.putString("temperature", temperature);
